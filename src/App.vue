@@ -1,17 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <section v-for="(item, index) in resumeData" :key="index">
+      {{item.title}}
+      <template v-for="(sItem, sIndex) in item.msg">
+        <p v-if="sItem.type === msgType.paragraph" :key="sIndex">{{sItem.content}}</p>
+        <li v-if="sItem.type === msgType.list" :key="sIndex">{{sItem.content}}</li>
+      </template>
+    </section>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import {resumeData, msgType} from './const.js'
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      resumeData,
+      msgType
+    }
   }
 }
 </script>
@@ -23,6 +30,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 </style>
