@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "better-scroll": "^1.12.4",
+    "prerender-spa-plugin": "^3.2.1",
     "vue": "^2.5.16"
   },
   "devDependencies": {

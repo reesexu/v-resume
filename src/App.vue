@@ -1,7 +1,8 @@
 <template>
   <div>
+    <!-- 菜单 -->
     <div class="menu">
-      <span class="icon-v-more" @click="showMenu = !showMenu"/>
+      <span :class="['icon-v-more', {'open' : showMenu}]" @click="showMenu = !showMenu"/>
       <transition name="slide-fade">
         <ul v-if="showMenu">
           <li v-for="(item, index) in navData" :key="index" @click="onNavClick(index)">
@@ -10,12 +11,13 @@
         </ul>
       </transition>
     </div>
+    <!-- 主体 -->
     <div id="app" ref="app" @click="hideMenu">
       <div class="content">
         <!-- 导航 -->
         <header>XUWENCHAO-RESUME</header>
         <!-- 内容区 -->
-        <section :class="item.class" v-for="(item, index) in resumeData" :key="index" :style="{background: item.background,}">
+        <section :class="item.class" v-for="(item, index) in resumeData" :key="index" :style="{backgroundColor: item.background,}">
           <div>
             <!-- 标题 -->
             <h1 v-if="index !== 0">{{item.title}}</h1>
@@ -53,26 +55,40 @@ export default {
         title: item.title,
         class: item.class
       }))
-      console.log(data)
-      return resumeData
+      data.push({
+        title: '我的博客',
+        link: 'https://blog.xuwenchao.site'
+      })
+      return data
     }
   },
   mounted() {
     // 初始化better-scroll
     this.$nextTick(() => {
-      this.scroll = new BScroll(this.$refs.app, { click: true })
+      this.scroll = new BScroll(this.$refs.app, {
+        click: true,
+        mouseWheel: {
+          speed: 20,
+          easeTime: 300
+        }
+      })
       this.scroll.on('scrollStart', this.hideMenu)
     })
   },
   methods: {
-    // 跳转到制定板块
+    // 跳转到制定板块或我的博客
     onNavClick(index) {
       const className = this.navData[index].class
-      this.showMenu = false
-      this.scroll.scrollToElement(
-        document.getElementsByClassName(className)[0],
-        600
-      )
+      const {link} = this.navData[index]
+      if (className) {
+        this.showMenu = false
+        this.scroll.scrollToElement(
+          document.getElementsByClassName(className)[0],
+          600
+        )
+      } else {
+        window.location.href = link
+      }
     },
     // 隐藏菜单
     hideMenu() {
@@ -152,10 +168,18 @@ header {
     font-size: 1.1rem;
     padding: 1.1rem;
   }
+  span {
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    transform: none;
+    &.open {
+      transform: rotate(45deg);
+    }
+  }
   ul {
     position: absolute;
-    right: 1.2rem;
-    top: 100%;
+    right: 2.5rem;
+    top: 70%;
     width: 9rem;
     font-size: 15px;
     background: #fff;
@@ -214,7 +238,7 @@ section {
     display: flex;
     align-items: center;
     span {
-      margin: .4rem;
+      margin: 0.4rem;
       font-size: 25px;
     }
     @include responsive() {
