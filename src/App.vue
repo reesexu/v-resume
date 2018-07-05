@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <!-- 菜单 -->
     <div class="menu">
       <span :class="['icon-v-more', {'open' : showMenu}]" @click="showMenu = !showMenu"/>
@@ -12,7 +12,7 @@
       </transition>
     </div>
     <!-- 主体 -->
-    <div id="app" ref="app" @click="hideMenu">
+    <div class="wrapper" ref="wrapper" @click="hideMenu">
       <div class="content">
         <!-- 导航 -->
         <header>XUWENCHAO-RESUME</header>
@@ -65,7 +65,7 @@ export default {
   mounted() {
     // 初始化better-scroll
     this.$nextTick(() => {
-      this.scroll = new BScroll(this.$refs.app, {
+      this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
         mouseWheel: {
           speed: 20,
@@ -79,7 +79,7 @@ export default {
     // 跳转到制定板块或我的博客
     onNavClick(index) {
       const className = this.navData[index].class
-      const {link} = this.navData[index]
+      const { link } = this.navData[index]
       if (className) {
         this.showMenu = false
         this.scroll.scrollToElement(
@@ -124,7 +124,7 @@ $headerHeight: 5rem;
   }
 }
 
-#app {
+.wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -249,7 +249,7 @@ section {
     display: block;
     width: 10rem;
     height: 10rem;
-    margin: 2rem auto;
+    margin: 1rem auto 2rem;
   }
   h3 {
     margin: 0.5rem 0;
