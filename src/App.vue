@@ -26,7 +26,7 @@
             <!-- 内容项 -->
             <template v-for="(sItem, sIndex) in item.msg">
               <h3 v-if="sItem.type === msgType.title" :key="sIndex">{{sItem.content}}</h3>
-              <p v-if="sItem.type === msgType.paragraph || sItem.type === msgType.list" :key="sIndex" @click="toNewPage(sItem.link)">
+              <p v-if="sItem.type === msgType.paragraph || sItem.type === msgType.list" :key="sIndex" @click="toNewPage(sItem.link)" :style="{cursor: sItem.link ? 'pointer' : 'default'}">
                 <span v-if="sItem.icon" :class="sItem.icon" /> {{sItem.content}}
               </p>
             </template>
@@ -148,7 +148,7 @@ header {
   top: 0;
   width: 100%;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 1.5rem;
   @include responsive() {
     font-size: 1.1rem;
@@ -158,27 +158,29 @@ header {
 .menu {
   position: fixed;
   z-index: 2;
-  font-size: 1.8rem;
   top: 0;
   right: 0;
   display: inline-block;
-  padding: 0.7rem;
+  padding: 1.3rem;
   cursor: pointer;
   @include responsive() {
-    font-size: 1.1rem;
-    padding: 1.1rem;
+    padding: 1.5rem;
   }
   span {
     display: inline-block;
     transition: all 0.2s ease-in-out;
     transform: none;
+    font-size: 1.8rem;
+      @include responsive() {
+      font-size: 1.1rem;
+    }
     &.open {
       transform: rotate(45deg);
     }
   }
   ul {
     position: absolute;
-    right: 2.5rem;
+    right: 3.2rem;
     top: 70%;
     width: 9rem;
     font-size: 15px;

@@ -46,9 +46,8 @@ export const resumeData = [
       getMsgObj(msgType.title, '珠海多士科技有限公司(2017/5~2018/5)'),
       getMsgObj(msgType.paragraph, 'web前端开发'),
       getMsgObj(msgType.list, '1.负责公司前端项目的调研，架构，实现'),
-      getMsgObj(msgType.list, '2.帮助前端团队进行react方向的技术架构迁移'),
-      getMsgObj(msgType.list, '3.官方网站,app内嵌h5的开发与维护'),
-      getMsgObj(msgType.list, '4.基于reactjs的hybrid app 诸葛小明2的技术选型与实现，在保证用户体验的同时，降低了开发以及维护的成本')
+      getMsgObj(msgType.list, '2.官方网站,app内嵌h5的开发与维护'),
+      getMsgObj(msgType.list, '3.基于reactjs的hybrid app 诸葛小明2的技术选型与实现，在保证用户体验的同时，降低了开发以及维护的成本')
     ]
   }, {
     title: '个人项目',
